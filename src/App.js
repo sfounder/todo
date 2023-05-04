@@ -1,28 +1,18 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import TasksProvider from "./providers/tasksProvider";
-import TaskInput from "./components/TaskInput";
-import TasksList from "./components/TasksList";
+import { Outlet, Route, Routes } from 'react-router-dom';
+import { HomePage, TodoPage } from './pages';
 
 
-function App() {
-
-
+export const App = () => {
     return (
-        <TasksProvider>
-            <div className="App">
-                <div className="container">
-                    <div className="row m-3">
-                        <h1>What to do?</h1>
-                    </div>
-                    <TaskInput/>
-                    <div className="row m-2">
-                        <TasksList/>
-                    </div>
-                </div>
-            </div>
-        </TasksProvider>
+        <Routes>
+            <Route  path = '/todo' element = { <Outlet /> }>
+                <Route index element = { <TodoPage /> } />
+            </Route>
+            <Route  path = '*' element = { <HomePage /> } />
+        </Routes>
     );
-}
+};
 
-export default App;
